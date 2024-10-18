@@ -67,9 +67,10 @@ declare namespace QueryString {
         & IParseBaseOptions
         & IParseDynamicOptions<AllowDots>;
 
-    interface ParsedQs {
-        [key: string]: undefined | string | string[] | ParsedQs | ParsedQs[];
-    }
+
+    type ParsedQsValue = string | UrlSafeObject | UrlSafeArray
+    type ParsedQsArray = ParsedQsValue
+    type ParsedQs = {[key: string]: ParsedQsValue }
 
     function stringify(obj: any, options?: IStringifyOptions<BooleanOptional>): string;
     function parse(str: string, options?: IParseOptions<BooleanOptional> & { decoder?: never | undefined }): ParsedQs;
